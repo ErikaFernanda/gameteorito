@@ -8,7 +8,6 @@ package teste;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import static java.lang.Thread.sleep;
 import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -26,12 +25,11 @@ public class Janela extends JFrame {
     int x1 = 0;
     int x2 = 0;
     int y1 = 0;
-    
+
     int ptn = 0;
-    
+
     int velocidade = 10;
     Random gerador = new Random();
-    
 
     ImageIcon nave = new ImageIcon(getClass().getResource("astro.png"));
     ImageIcon fundo = new ImageIcon(getClass().getResource("fundo2.jpg"));
@@ -42,7 +40,7 @@ public class Janela extends JFrame {
     JLabel Meteoro = new JLabel(met);
     JLabel Pontos = new JLabel();
 
-//    JLabel Fundo2 = new JLabel(fundo);
+    // JLabel Fundo2 = new JLabel(fundo);
     public Janela() {
         new Movimento().start();
     }
@@ -85,63 +83,48 @@ public class Janela extends JFrame {
 
             }
         });
-        
+
     }
-    public void sorteio(){
-            
+
+    public void sorteio() {
+
         y1 = gerador.nextInt((120 - (-130)) + 1) + (-130);
-        System.out.println(y1 +" Novo sorteio y ");
+        System.out.println(y1 + " Novo sorteio y ");
         x2 = gerador.nextInt((120 - (-130)) + 1) + (-130);
-        System.out.println(y1 +" Novo sorteio x");
-        
+        System.out.println(y1 + " Novo sorteio x");
+
     }
 
     public class Movimento extends Thread {
 
         public void run() {
-              
+
             sorteio();
             while (true) {
-                
+
                 x1 = x1 - 1;
                 y1 = y1 + 1;
                 x2 = x2 - 1;
-                
+
                 Pontos.setText(ptn + " Pontos");
                 try {
 
                     sleep(velocidade);
-                    
-                    
 
                 } catch (Exception erro) {
 
                 }
                 if (Fundo.getX() == Fundo.getX()) {
-
-                    System.out.println(y1);
-                    
                     Fundo.setBounds(x1, 0, 900, 500);
                     Meteoro.setBounds(x2, y1, 200, 300);
                     if (x1 < -400) {
-                        
-//                        y1 = -200;
                         x1 = 0;
                         ptn = ptn + 18;
-//                        velocidade = velocidade - 1;
                         Fundo.setBounds(x1, 0, 900, 500);
                         sorteio();
-                        
+
                     }
-//                     Fundo2.setBounds(Fundo2.getX()+2,0,200,500);
-                } 
-//                else {
-//                    
-//                    Fundo.setBounds(0, 100, 900, 500);
-////                    Fundo2.setBounds(0,2,10,200);
-//                    Meteoro.setBounds(x1, y1, 200, 300);
-//                    
-//                }
+                }
 
             }
         }
@@ -149,10 +132,7 @@ public class Janela extends JFrame {
 
     public void painel() {
         Fundo.setBounds(0, 100, 900, 500);
-//        Fundo2.setBounds(200,0,200,500);
-
         Nave.setBounds(0, 100, 200, 300);
-//        Meteoro.setBounds(200, -80, 200, 300);
         Pontos.setBounds(300, -120, 200, 300);
         Pontos.setForeground(Color.white);
 
